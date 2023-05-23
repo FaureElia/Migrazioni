@@ -18,6 +18,8 @@ public class Model {
 
 	private Graph<Country, DefaultEdge> graph;
 	private Map<Integer, Country> countriesMap;
+	
+	private int numPassiSimulatore;
 
 	public Model() {
 		this.countriesMap = new HashMap<>();
@@ -37,7 +39,6 @@ public class Model {
 		List<Adiacenza> archi = dao.getCoppieAdiacenti(anno);
 		for (Adiacenza c : archi) {
 			graph.addEdge(this.countriesMap.get(c.getState1no()), this.countriesMap.get(c.getState2no()));
-
 		}
 	}
 
@@ -60,4 +61,12 @@ public class Model {
 		return null;
 
 	}
+	
+	public Map<Country, Integer> simula(Country nazione) {
+		Simulatore sim=new Simulatore(this.graph,nazione);
+		return sim.simula();
+	
+	}
+	
+	
 }

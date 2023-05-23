@@ -6,6 +6,7 @@ package it.polito.tdp.borders;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.borders.model.Country;
@@ -62,6 +63,18 @@ public class FXMLController {
 
 	@FXML
 	void doSimula(ActionEvent event) {
+		this.txtResult.clear();
+		Country nazione=this.boxNazione.getValue();
+		if (nazione!=null) {
+			Map<Country, Integer> risultato=this.model.simula(nazione);
+			for(Country c: risultato.keySet()) {
+				this.txtResult.appendText("\n"+c+" :"+risultato.get(c));
+				
+			}
+			
+		}else {
+			this.txtResult.setText("Inserire una nazione di partenza");
+		}
 
 	}
 
